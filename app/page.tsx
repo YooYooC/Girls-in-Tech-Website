@@ -1,17 +1,90 @@
+"use client";
 import NavBar from "./components/NavBar";
+import { useState } from "react";
 
 export default function Page() {
+    const [currentImage, setCurrentImage] = useState(0);
+    
+    const images = [
+        { id: 1, title: "Program 1" },
+        { id: 2, title: "Program 2" },
+        { id: 3, title: "Program 3" },
+        { id: 4, title: "Program 4" },
+        { id: 5, title: "Program 5" },
+    ];
+    
+    const nextImage = () => {
+        setCurrentImage((prev) => (prev + 1) % images.length);
+    };
+    
+    const prevImage = () => {
+        setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    };
+    
     return (
         <>
             <NavBar />
-            <div className="justify-center text-center mt-20 bg-black h-120">
-                About us
+            
+            {/* Card Gallery Section */}
+            <div className="w-full mt-20 px-4 md:px-8">
+                <div className="relative h-96 rounded-lg shadow-lg overflow-hidden">
+                    
+                    {/* Image Placeholder Background */}
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg flex items-center justify-center">
+                        <div className="text-center">
+                            <p className="text-white text-4xl font-semibold mb-2">Image {currentImage + 1}</p>
+                            <p className="text-yellow-300 text-xl">{images[currentImage].title}</p>
+                        </div>
+                    </div>
+                    
+                    {/* Gradient Overlay - Black on sides, Pink in center */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-rose-300 to-black rounded-lg"></div>
+                    
+                    {/* Left Arrow */}
+                    <button
+                        onClick={prevImage}
+                        className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 text-yellow-400 hover:text-yellow-300 transition-colors"
+                        aria-label="Previous image"
+                    >
+                        <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                    
+                    {/* Right Arrow */}
+                    <button
+                        onClick={nextImage}
+                        className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 text-yellow-400 hover:text-yellow-300 transition-colors"
+                        aria-label="Next image"
+                    >
+                        <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                    
+                    {/* Dot Indicators */}
+                    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+                        {images.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentImage(index)}
+                                className={`w-3 h-3 rounded-full transition-colors ${
+                                    index === currentImage ? "bg-yellow-400" : "bg-black"
+                                }`}
+                                aria-label={`Go to image ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div className="absolute left-20 top-100 text-white items-center z-100 h-full w-full">
-                name of program and short description
+
+            {/* Content Section */}
+            <div className="w-full px-4 md:px-8 py-12">
+                <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-200 to-yellow-300 mb-8">About Us</h1>
+                <p className="text-lg text-white bg-gradient-to-r from-black to-gray-800 p-8 rounded-lg border border-rose-200">
+                    longer paragraph description about the program
+                </p>
             </div>
-            <h1>About Us</h1>
-            <p>longer paragraph description about the program</p>
         </>
     );
 }
