@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Girls in Tech Website",
-  description: "Girls in Tech community website with gallery and programs",
+  title: "Girls in Tech Website - Gallery & Programs",
+  description: "Girls in Tech community website with gallery and programs - Updated 2026",
 };
 
 export default function RootLayout({
