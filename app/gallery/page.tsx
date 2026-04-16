@@ -45,14 +45,12 @@ export default function GalleryPage() {
         },
     ];
     
-    // Triplicate items for smooth infinite loop
     const triplicatedItems = [...galleryItems, ...galleryItems, ...galleryItems];
     
     return (
         <>
             <NavBar />
             
-            {/* Page Title Section */}
             <div className="w-full mt-20 px-4 md:px-8" style={{ marginLeft: '60px' }}>
                 <h1 className="text-5xl md:text-6xl font-bold mb-2" style={{ color: 'var(--color-gold)' }}>
                     Gallery
@@ -62,16 +60,13 @@ export default function GalleryPage() {
                 </p>
             </div>
 
-            {/* Auto-Scrolling Gallery Section */}
             <div 
                 className="w-full px-4 md:px-8 mb-20 relative"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 onWheel={handleWheel}
             >
-                {/* Carousel Container */}
                 <div className="relative overflow-visible rounded-lg">
-                    {/* Animated Track */}
                     <div 
                         className={`flex gap-6 py-4 ${isHovering ? 'animation-paused' : ''}`}
                         style={{
@@ -86,7 +81,6 @@ export default function GalleryPage() {
                                 key={`${item.id}-${index}`}
                                 className="flex-shrink-0 w-96 transition-transform duration-300 transform hover:scale-110 hover:z-20 group"
                             >
-                                {/* Card */}
                                 <div 
                                     className="rounded-lg overflow-hidden border-2 transition-all duration-300 h-full shadow-lg hover:shadow-2xl"
                                     style={{
@@ -102,8 +96,6 @@ export default function GalleryPage() {
                                         e.currentTarget.style.boxShadow = '';
                                     }}
                                 >
-                                    
-                                    {/* Image Placeholder */}
                                     <div 
                                         className="w-full h-64 flex items-center justify-center border-b-2"
                                         style={{
@@ -116,8 +108,6 @@ export default function GalleryPage() {
                                             <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>Replace with image</p>
                                         </div>
                                     </div>
-                                    
-                                    {/* Card Content */}
                                     <div className="p-8" style={{ backgroundColor: 'rgba(225, 138, 173, 0.6)' }}>
                                         <h3 className="text-xl font-bold mb-2 transition-colors group-hover:opacity-80" style={{ color: 'var(--color-gold)' }}>
                                             {item.title}
@@ -125,8 +115,6 @@ export default function GalleryPage() {
                                         <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                                             {item.description}
                                         </p>
-                                        
-                                        {/* Learn More Button */}
                                         <a
                                             href="#"
                                             className="inline-block mt-4 px-4 py-2 font-semibold text-sm rounded transition-all duration-300"
@@ -144,14 +132,11 @@ export default function GalleryPage() {
                             </div>
                         ))}
                     </div>
-                    
-                    {/* Fade Edges - Solid Color */}
                     <div className="fixed pointer-events-none z-50" style={{ left: '0', top: '0', bottom: '0', width: '50px', backgroundColor: 'rgba(13, 13, 13, 0.8)' }}></div>
                     <div className="fixed pointer-events-none z-50" style={{ right: '0', top: '0', bottom: '0', width: '50px', backgroundColor: 'rgba(13, 13, 13, 0.8)' }}></div>
                 </div>
             </div>
 
-            {/* Gallery Description Section */}
             <div className="w-full px-4 md:px-8 py-12 mb-12" style={{ marginLeft: '60px' }}>
                 <div className="max-w-4xl">
                     <h2 className="text-4xl font-bold mb-6" style={{ color: 'var(--color-pink-soft)' }}>About This Gallery</h2>
